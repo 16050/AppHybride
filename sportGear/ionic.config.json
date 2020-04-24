@@ -1,0 +1,7 @@
+{
+  "name": "sportGear",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
