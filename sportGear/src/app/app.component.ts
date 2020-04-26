@@ -22,11 +22,11 @@ export class AppComponent implements OnInit {
     },
     {
       title: 'New notice',
-      url: '',
+      url: '/notice-create',
     },
     {
       title: 'New category',
-      url: '',
+      url: '/category-create',
     },
   ];
   //public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];

@@ -21,6 +21,15 @@ const routes: Routes = [
     path: 'notice-list',
     loadChildren: () => import('./pages/notice-list/notice-list.module').then( m => m.NoticeListPageModule)
   },
+
+  {
+    path: 'category-create',
+    loadChildren: () => import('./pages/category-create/category-create.module').then( m => m.CategoryCreatePageModule)
+  },
+  {
+    path: 'notice-create',
+    loadChildren: () => import('./pages/notice-create/notice-create.module').then( m => m.NoticeCreatePageModule)
+  },
 ];
 
 @NgModule({
