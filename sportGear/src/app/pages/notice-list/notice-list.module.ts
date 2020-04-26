@@ -4,17 +4,17 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { GearCreatePageRoutingModule } from './gear-create-routing.module';
+import { NoticeListPageRoutingModule } from './notice-list-routing.module';
 
-import { GearCreatePage } from './gear-create.page';
+import { NoticeListPage } from './notice-list.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    GearCreatePageRoutingModule
+    NoticeListPageRoutingModule
   ],
-  declarations: [GearCreatePage]
+  declarations: [NoticeListPage]
 })
-export class GearCreatePageModule {}
+export class NoticeListPageModule {}

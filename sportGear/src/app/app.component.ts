@@ -13,29 +13,21 @@ export class AppComponent implements OnInit {
   public selectedIndex = 0;
   public appPages = [
     {
-      title: 'All gears',
-      url: '/folder/Inbox',
-    },
-    {
-      title: 'Sports',
-      url: '/sport-list',
+      title: 'All notices',
+      url: '/notice-list',
     },
     {
       title: 'Categories',
-      url: '/folder/Favorites',
+      url: '/category-list',
     },
     {
-      title: 'New gear',
-      url: '/folder/Archived',
-    },
-    {
-      title: 'New sport',
-      url: '/sport-create',
+      title: 'New notice',
+      url: '',
     },
     {
       title: 'New category',
-      url: '/folder/Spam',
-    }
+      url: '',
+    },
   ];
   //public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
 
@@ -55,7 +47,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    const path = window.location.pathname.split('folder/')[1];
+    const path = window.location.pathname.split('gear-list/')[1];
     if (path !== undefined) {
       this.selectedIndex = this.appPages.findIndex(page => page.title.toLowerCase() === path.toLowerCase());
     }

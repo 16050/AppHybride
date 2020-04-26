@@ -1,0 +1,54 @@
+import { CategoryService } from './../../services/category.service';
+import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Router, NavigationEnd } from '@angular/router';
+import { LoadingController } from '@ionic/angular';
+
+@Component({
+  selector: 'app-category-list',
+  templateUrl: './category-list.page.html',
+  styleUrls: ['./category-list.page.scss'],
+})
+export class CategoryListPage implements OnInit {
+
+  results: Observable<any>;
+  //searchTerm: string = '';
+  //type: SearchType = SearchType.all;
+  navigationSubscription;
+  categories: any;
+
+  constructor(private categoryService: CategoryService, public loadingController: LoadingController, private router: Router) {
+    this.navigationSubscription = this.router.events.subscribe((e: any) => {
+      if (e instanceof NavigationEnd) {
+        this.initialiseInvites();
+      }
+    });
+  }
+
+  initialiseInvites() {
+    this.findAll();
+  }
+
+  ngOnInit() {
+    this.findAll();
+  }
+
+  searchChanged() {
+    // Call our service function which returns an Observable
+    this.results = this.categoryService.findAll();
+  }
+  async findAll() {
+    const loading = await this.loadingController.create();
+    await loading.present();
+    await this.categoryService.findAll()
+      .subscribe(res => {
+        console.log(res);
+        this.categories = res;
+        loading.dismiss();
+      }, err => {
+        console.log(err);
+        loading.dismiss();
+      });
+    }
+
+}
