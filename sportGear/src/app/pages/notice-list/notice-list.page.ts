@@ -1,4 +1,8 @@
+import { NoticeService } from './../../services/notice.service';
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
+import { LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-notice-list',
@@ -7,9 +11,45 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NoticeListPage implements OnInit {
 
-  constructor() { }
+  navigationSubscription;
+  notices: any;
+  notice: any;
+  results: Observable<any>;
+
+  constructor(private noticeService: NoticeService, public loadingController: LoadingController, private router: Router, public route: ActivatedRoute) {
+    this.navigationSubscription = this.router.events.subscribe((e: any) => {
+      if (e instanceof NavigationEnd) {
+        this.initialiseInvites();
+      }
+    });
+   }
+
+   initialiseInvites() {
+    this.findAll();
+  }
 
   ngOnInit() {
+    this.findAll();
   }
+
+  searchChanged() {
+    // Call our service function which returns an Observable
+    this.results = this.noticeService.findAll();
+  }
+
+  async findAll() {
+    const loading = await this.loadingController.create();
+    await loading.present();
+    await this.noticeService.findAll()
+      .subscribe(res => {
+        console.log(res);
+        this.notices = res;
+        loading.dismiss();
+      }, err => {
+        console.log(err);
+        loading.dismiss();
+    });
+  }
+
 
 }
