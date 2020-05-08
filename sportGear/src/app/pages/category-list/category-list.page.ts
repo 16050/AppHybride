@@ -1,7 +1,7 @@
 import { CategoryService } from './../../services/category.service';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Router, NavigationEnd } from '@angular/router';
+import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { LoadingController } from '@ionic/angular';
 
 @Component({
@@ -18,7 +18,7 @@ export class CategoryListPage implements OnInit {
   categories: any;
   category: any;
 
-  constructor(private categoryService: CategoryService, public loadingController: LoadingController, private router: Router) {
+  constructor(private categoryService: CategoryService, public loadingController: LoadingController, private router: Router, public route: ActivatedRoute) {
     this.navigationSubscription = this.router.events.subscribe((e: any) => {
       if (e instanceof NavigationEnd) {
         this.initialiseInvites();
@@ -53,6 +53,21 @@ export class CategoryListPage implements OnInit {
     });
   }
 
+  async findOne() {
+    const loading = await this.loadingController.create();
+    await loading.present();
+    await this.categoryService.findOne(this.route.snapshot.paramMap.get('id'))
+      .subscribe(res => {
+        console.log(res);
+        this.category = res;
+        loading.dismiss();
+      }, err => {
+        console.log(err);
+        loading.dismiss();
+      }
+    );
+  }
+
   async deleteCategory(id) {
     const loading = await this.loadingController.create();
     await loading.present();
@@ -65,7 +80,6 @@ export class CategoryListPage implements OnInit {
         console.log(err);
         loading.dismiss();
     });
-    this.findAll();
   }
 
 }

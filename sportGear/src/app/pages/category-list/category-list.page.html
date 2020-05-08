@@ -16,7 +16,8 @@
   <ion-list>
     <ion-item *ngFor="let item of categories" routerLink="/category-detail/{{item.id}}">
       <ion-text>{{item.name}}</ion-text>
-      <ion-button class="btn btn-primary" (click)="deleteCategory(item.id)">Delete</ion-button>
+      <ion-button class="btn btn-primary" routerLink="/category-edit/{{item.id}}">Edit</ion-button>
+      <ion-button class="btn btn-primary" routerLink="/category-list" (click)="deleteCategory(item.id)">Delete</ion-button>
     </ion-item>
   </ion-list>
 </ion-content>

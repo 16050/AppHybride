@@ -6,11 +6,11 @@ import { LoadingController } from '@ionic/angular';
 import { FormControl, FormGroupDirective, FormBuilder, FormGroup, NgForm, Validators, FormArray } from '@angular/forms';
 
 @Component({
-  selector: 'app-category-create',
-  templateUrl: './category-create.page.html',
-  styleUrls: ['./category-create.page.scss'],
+  selector: 'app-category-edit',
+  templateUrl: './category-edit.page.html',
+  styleUrls: ['./category-edit.page.scss'],
 })
-export class CategoryCreatePage implements OnInit {
+export class CategoryEditPage implements OnInit {
 
   categoryForm: FormGroup;
 
@@ -20,19 +20,28 @@ export class CategoryCreatePage implements OnInit {
     });
   }
 
-  async newCategory(){
+  ngOnInit() {
+  }
+
+  async findOne(id) {
+    const loading = await this.loadingController.create();
+    await this.categoryService.findOne(id).subscribe(res => {
+      this.categoryForm.controls['name'].setValue(res.name);
+    });
+  }
+
+  async editCategory() {
     const loading = await this.loadingController.create();
     await loading.present();
-    await this.categoryService.newCategory(this.categoryForm.value)
+    await this.categoryService.editCategory(this.route.snapshot.paramMap.get('id'), this.categoryForm.value)
     .subscribe(res => {
-        this.router.navigate(['/category-list']);
+      let id = res['id'];
+        this.router.navigate(['/category-list', JSON.stringify(id)]);
         loading.dismiss();
       }, (err) => {
         console.log(err);
         loading.dismiss();
     });
   }
-  
-  ngOnInit() {
-  }
+
 }

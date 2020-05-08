@@ -42,6 +42,13 @@ export class CategoryService {
     );
   }
 
+  findOne(id: string): Observable<any> {
+    return this.http.get(this.url + '/' + id, httpOptions).pipe(
+      map(this.extractData),
+      catchError(this.handleError)
+    );
+  }
+
   newCategory(data): Observable<any> {
     return this.http.post(this.url, data, httpOptions).pipe(
       catchError(this.handleError)
@@ -50,6 +57,12 @@ export class CategoryService {
 
   deleteCategory(id): Observable<any> {
     return this.http.delete(this.url + '/' + id, httpOptions).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  editCategory(id, data): Observable<any> {
+    return this.http.put(this.url + '/' + id, data, httpOptions).pipe(
       catchError(this.handleError)
     );
   }
