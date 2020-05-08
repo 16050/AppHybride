@@ -4,13 +4,8 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'folder',
+    redirectTo: 'notice-list',
     pathMatch: 'full'
-  },
-
-  {
-    path: 'folder',
-    loadChildren: () => import('./folder/folder.module').then( m => m.FolderPageModule)
   },
 
   {
@@ -29,6 +24,14 @@ const routes: Routes = [
   {
     path: 'notice-create',
     loadChildren: () => import('./pages/notice-create/notice-create.module').then( m => m.NoticeCreatePageModule)
+  },
+  {
+    path: 'notice-detail',
+    loadChildren: () => import('./pages/notice-detail/notice-detail.module').then( m => m.NoticeDetailPageModule)
+  },
+  {
+    path: 'category-edit',
+    loadChildren: () => import('./pages/category-edit/category-edit.module').then( m => m.CategoryEditPageModule)
   },
 ];
 

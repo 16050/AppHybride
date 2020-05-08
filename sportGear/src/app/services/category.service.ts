@@ -47,4 +47,10 @@ export class CategoryService {
       catchError(this.handleError)
     );
   }
+
+  deleteCategory(id): Observable<any> {
+    return this.http.delete(this.url + '/' + id, httpOptions).pipe(
+      catchError(this.handleError)
+    );
+  }
 }

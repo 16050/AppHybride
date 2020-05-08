@@ -16,6 +16,7 @@ export class CategoryListPage implements OnInit {
   //type: SearchType = SearchType.all;
   navigationSubscription;
   categories: any;
+  category: any;
 
   constructor(private categoryService: CategoryService, public loadingController: LoadingController, private router: Router) {
     this.navigationSubscription = this.router.events.subscribe((e: any) => {
@@ -37,6 +38,7 @@ export class CategoryListPage implements OnInit {
     // Call our service function which returns an Observable
     this.results = this.categoryService.findAll();
   }
+
   async findAll() {
     const loading = await this.loadingController.create();
     await loading.present();
@@ -48,7 +50,22 @@ export class CategoryListPage implements OnInit {
       }, err => {
         console.log(err);
         loading.dismiss();
-      });
-    }
+    });
+  }
+
+  async deleteCategory(id) {
+    const loading = await this.loadingController.create();
+    await loading.present();
+    await this.categoryService.deleteCategory(id)
+      .subscribe(res => {
+        console.log(res);
+        this.category = res;
+        loading.dismiss();
+      }, err => {
+        console.log(err);
+        loading.dismiss();
+    });
+    this.findAll();
+  }
 
 }
