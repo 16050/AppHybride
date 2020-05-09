@@ -22,13 +22,10 @@ const routes: Routes = [
     loadChildren: () => import('./pages/category-create/category-create.module').then( m => m.CategoryCreatePageModule)
   },
   {
-    path: 'category-edit',
+    path: 'category-edit/:id',
     loadChildren: () => import('./pages/category-edit/category-edit.module').then( m => m.CategoryEditPageModule)
   },
-  {
-    path: 'category-edit/:id',
-    loadChildren: './pages/category-edit/category-edit.module#CategoryEditPageModule'
-  },
+
   {
     path: 'notice-create',
     loadChildren: () => import('./pages/notice-create/notice-create.module').then( m => m.NoticeCreatePageModule)
@@ -37,6 +34,11 @@ const routes: Routes = [
     path: 'notice-detail/:id',
     loadChildren: () => import('./pages/notice-detail/notice-detail.module').then( m => m.NoticeDetailPageModule)
   },
+  {
+    path: 'notice-edit/:id',
+    loadChildren: () => import('./pages/notice-edit/notice-edit.module').then( m => m.NoticeEditPageModule)
+  },
+
 ];
 
 @NgModule({

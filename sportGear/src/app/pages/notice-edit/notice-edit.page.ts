@@ -7,11 +7,11 @@ import { LoadingController } from '@ionic/angular';
 import { FormControl, FormGroupDirective, FormBuilder, FormGroup, NgForm, Validators, FormArray } from '@angular/forms';
 
 @Component({
-  selector: 'app-notice-create',
-  templateUrl: './notice-create.page.html',
-  styleUrls: ['./notice-create.page.scss'],
+  selector: 'app-notice-edit',
+  templateUrl: './notice-edit.page.html',
+  styleUrls: ['./notice-edit.page.scss'],
 })
-export class NoticeCreatePage implements OnInit {
+export class NoticeEditPage implements OnInit {
   noticeForm: FormGroup;
   categories: any;
   id_name: any;
@@ -24,7 +24,6 @@ export class NoticeCreatePage implements OnInit {
       'category' : [null, Validators.required]
     });
   }
-
   async findAll() {
     const loading = await this.loadingController.create();
     await loading.present();
@@ -39,14 +38,15 @@ export class NoticeCreatePage implements OnInit {
     });
   }
 
-  async newNotice(){
+  async editNotice(){
     this.id_name = this.noticeForm.value.category.split('|');
     this.noticeForm.value.category = {'id': Number(this.id_name[0]), 'name': this.id_name[1]};
     const loading = await this.loadingController.create();
     await loading.present();
-    await this.noticeService.newNotice(this.noticeForm.value)
+    await this.noticeService.editNotice(this.route.snapshot.paramMap.get('id'), this.noticeForm.value)
     .subscribe(res => {
-        this.router.navigate(['/notice-list']);
+      let id = res['id'];
+        this.router.navigate(['/notice-list', JSON.stringify(id)]);
         loading.dismiss();
       }, (err) => {
         console.log(err);
@@ -57,4 +57,5 @@ export class NoticeCreatePage implements OnInit {
   ngOnInit() {
     this.findAll();
   }
+
 }

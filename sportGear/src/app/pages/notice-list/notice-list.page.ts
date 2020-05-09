@@ -78,6 +78,7 @@ export class NoticeListPage implements OnInit {
         console.log(err);
         loading.dismiss();
     });
+    this.findAll();
   }
 
 }

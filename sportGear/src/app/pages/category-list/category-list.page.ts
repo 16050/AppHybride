@@ -12,8 +12,6 @@ import { LoadingController } from '@ionic/angular';
 export class CategoryListPage implements OnInit {
 
   results: Observable<any>;
-  //searchTerm: string = '';
-  //type: SearchType = SearchType.all;
   navigationSubscription;
   categories: any;
   category: any;
@@ -80,6 +78,7 @@ export class CategoryListPage implements OnInit {
         console.log(err);
         loading.dismiss();
     });
+    this.findAll();
   }
 
 }
