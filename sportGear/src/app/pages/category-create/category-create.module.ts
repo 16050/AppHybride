@@ -19,3 +19,4 @@ import { CategoryCreatePage } from './category-create.page';
   declarations: [CategoryCreatePage]
 })
 export class CategoryCreatePageModule {}
+
