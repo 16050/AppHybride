@@ -51,5 +51,33 @@ export class NoticeListPage implements OnInit {
     });
   }
 
+  async findOne() {
+    const loading = await this.loadingController.create();
+    await loading.present();
+    await this.noticeService.findOne(this.route.snapshot.paramMap.get('id'))
+      .subscribe(res => {
+        console.log(res);
+        this.notice = res;
+        loading.dismiss();
+      }, err => {
+        console.log(err);
+        loading.dismiss();
+      }
+    );
+  }
+
+  async deleteCategory(id) {
+    const loading = await this.loadingController.create();
+    await loading.present();
+    await this.noticeService.deleteNotice(id)
+      .subscribe(res => {
+        console.log(res);
+        this.notice = res;
+        loading.dismiss();
+      }, err => {
+        console.log(err);
+        loading.dismiss();
+    });
+  }
 
 }
