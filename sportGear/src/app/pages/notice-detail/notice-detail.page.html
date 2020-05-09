@@ -1,9 +1,32 @@
-<ion-header>
+<ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>notice-detail</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Notices detail</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Notices detail</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-card>
+    <ion-card-header>
+      <ion-item>
+      <ion-card-title>Title: {{notice.title}}</ion-card-title>
+      </ion-item>
+      <ion-item>
+      <ion-card-title>Content: {{notice.content}}</ion-card-title>
+      </ion-item>
+      <ion-item>
+      <ion-card-title>Date: {{notice.date}}</ion-card-title>
+      </ion-item>
+      <ion-item>
+      <ion-card-title>Category: {{category.name}}</ion-card-title>
+      </ion-item>
+    </ion-card-header>
+  </ion-card>
 </ion-content>

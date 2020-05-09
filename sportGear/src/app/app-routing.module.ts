@@ -34,7 +34,7 @@ const routes: Routes = [
     loadChildren: () => import('./pages/notice-create/notice-create.module').then( m => m.NoticeCreatePageModule)
   },
   {
-    path: 'notice-detail',
+    path: 'notice-detail/:id',
     loadChildren: () => import('./pages/notice-detail/notice-detail.module').then( m => m.NoticeDetailPageModule)
   },
 ];

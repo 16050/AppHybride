@@ -14,7 +14,7 @@
     </ion-toolbar>
   </ion-header>
   <ion-list>
-    <ion-item *ngFor="let item of notices">
+    <ion-item *ngFor="let item of notices" routerLink="/notice-detail/{{item.id}}">
       <ion-text>{{item.title}}</ion-text>
     </ion-item>
   </ion-list>
