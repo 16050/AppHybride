@@ -36,7 +36,7 @@ export class CategoryEditPage implements OnInit {
     await this.categoryService.editCategory(this.route.snapshot.paramMap.get('id'), this.categoryForm.value)
     .subscribe(res => {
       let id = res['id'];
-        this.router.navigate(['/category-list', JSON.stringify(id)]);
+        this.router.navigate(['/category-list']);
         loading.dismiss();
       }, (err) => {
         console.log(err);

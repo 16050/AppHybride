@@ -25,7 +25,6 @@ export class CategoryCreatePage implements OnInit {
     await loading.present();
     await this.categoryService.newCategory(this.categoryForm.value)
     .subscribe(res => {
-        this.router.navigate(['/category-list']);
         loading.dismiss();
       }, (err) => {
         console.log(err);

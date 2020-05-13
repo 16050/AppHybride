@@ -66,7 +66,7 @@ export class NoticeListPage implements OnInit {
     );
   }
 
-  async deleteCategory(id) {
+  async deleteNotice(id) {
     const loading = await this.loadingController.create();
     await loading.present();
     await this.noticeService.deleteNotice(id)

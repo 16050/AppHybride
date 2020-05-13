@@ -13,20 +13,12 @@ export class AppComponent implements OnInit {
   public selectedIndex = 0;
   public appPages = [
     {
-      title: 'All notices',
+      title: 'Notices',
       url: '/notice-list',
     },
     {
       title: 'Categories',
       url: '/category-list',
-    },
-    {
-      title: 'New notice',
-      url: '/notice-create',
-    },
-    {
-      title: 'New category',
-      url: '/category-create',
     },
   ];
   //public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
