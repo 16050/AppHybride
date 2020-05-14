@@ -15,15 +15,19 @@ export class NoticeEditPage implements OnInit {
   noticeForm: FormGroup;
   categories: any;
   id_name: any;
+  notice: any = {};
+  category: any = {};
 
   constructor(private categoryService: CategoryService, private noticeService: NoticeService, public loadingController: LoadingController, private router: Router, private route: ActivatedRoute, private formBuilder: FormBuilder) {
     this.findAll();
+    this.findOne(this.route.snapshot.paramMap.get("id"));
     this.noticeForm = this.formBuilder.group({
       'title' : [null, Validators.required],
       'content' : [null, Validators.required],
       'category' : [null, Validators.required]
     });
   }
+
   async findAll() {
     const loading = await this.loadingController.create();
     await loading.present();
@@ -38,6 +42,22 @@ export class NoticeEditPage implements OnInit {
     });
   }
 
+  async findOne(id) {
+    const loading = await this.loadingController.create();
+    await loading.present();
+    await this.noticeService.findOne(this.route.snapshot.paramMap.get('id'))
+      .subscribe(res => {
+        this.notice = res;
+        this.category = res.category;
+        loading.dismiss();
+      },
+      err => {
+        console.log(err);
+        loading.dismiss();
+      }
+    );
+  }
+
   async editNotice(){
     this.id_name = this.noticeForm.value.category.split('|');
     this.noticeForm.value.category = {'id': Number(this.id_name[0]), 'name': this.id_name[1]};
@@ -46,16 +66,15 @@ export class NoticeEditPage implements OnInit {
     await this.noticeService.editNotice(this.route.snapshot.paramMap.get('id'), this.noticeForm.value)
     .subscribe(res => {
       let id = res['id'];
-        this.router.navigate(['/notice-list', JSON.stringify(id)]);
+        this.router.navigate(['/notice-list']);
         loading.dismiss();
       }, (err) => {
         console.log(err);
         loading.dismiss();
     });
   }
-
+  
   ngOnInit() {
-    this.findAll();
+    this.findOne(this.route.snapshot.paramMap.get("id"))
   }
-
 }

@@ -18,21 +18,21 @@
     <form [formGroup]="noticeForm">
       <ion-item>
         <ion-label position="floating">Title: </ion-label>
-        <ion-input type="text" formControlName="title"></ion-input>
+        <ion-input type="text" formControlName="title" value="{{notice.title}}"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label position="floating">Content: </ion-label>
-        <ion-textarea type="text" formControlName="content"></ion-textarea>
+        <ion-textarea type="text" formControlName="content" value="{{notice.content}}"></ion-textarea>
       </ion-item>
       <ion-item>
           <ion-label position="floating">Category: </ion-label>
-          <ion-select formControlName="category">
+          <ion-select formControlName="category" interface="popover" placeholder="{{category.name}}">
               <ion-select-option *ngFor="let item of categories" value="{{item.id}}|{{item.name}}">{{item.name}}</ion-select-option>
           </ion-select>
       </ion-item>
       <ion-item>
         <ion-button shape="round" color="danger" routerLink="/notice-list">Cancel</ion-button>
-        <ion-button shape="round" color="primary" [disabled]="!noticeForm.valid" routerLink="/notice-list" (click)="editNotice()">Update</ion-button>
+        <ion-button shape="round" color="primary" [disabled]="!noticeForm.valid" (click)="editNotice()">Update</ion-button>
       </ion-item>
     </form>
     </ion-card>

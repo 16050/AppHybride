@@ -13,19 +13,23 @@ import { FormControl, FormGroupDirective, FormBuilder, FormGroup, NgForm, Valida
 export class CategoryEditPage implements OnInit {
 
   categoryForm: FormGroup;
+  category: any={};
 
   constructor(private categoryService: CategoryService, public loadingController: LoadingController, private router: Router, private route: ActivatedRoute, private formBuilder: FormBuilder) {
+    this.findOne(this.route.snapshot.paramMap.get("id"))
     this.categoryForm = this.formBuilder.group({
       'name' : [null, Validators.required],
     });
   }
 
   ngOnInit() {
+    this.findOne(this.route.snapshot.paramMap.get("id"))
   }
 
   async findOne(id) {
     const loading = await this.loadingController.create();
     await this.categoryService.findOne(id).subscribe(res => {
+      this.category = res;
       this.categoryForm.controls['name'].setValue(res.name);
     });
   }
