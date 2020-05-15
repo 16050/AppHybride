@@ -73,6 +73,7 @@ export class NoticeListPage implements OnInit {
       .subscribe(res => {
         console.log(res);
         this.notice = res;
+        this.router.navigate(['/notice-list']);
         loading.dismiss();
       }, err => {
         console.log(err);

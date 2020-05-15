@@ -73,6 +73,7 @@ export class CategoryListPage implements OnInit {
       .subscribe(res => {
         console.log(res);
         this.category = res;
+        this.router.navigate(['/category-list']);
         loading.dismiss();
       }, err => {
         console.log(err);
